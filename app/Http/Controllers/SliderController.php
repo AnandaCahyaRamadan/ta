@@ -39,16 +39,18 @@ class SliderController extends Controller
      * @param  \App\Http\Requests\StoreSliderRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Slider $slider)
     {
         $validasi = $request->validate([
+            'caption' => 'required',
+            'deskripsi' => 'required',
             'gambar' => 'image|file|max:3000'
         ]);
         
         if ($request->file('gambar')){
             $validasi['gambar'] = $request->file('gambar')->store('sliders');
         };
-        Slider::create($validasi);
+        $slider->create($validasi);
         return redirect()->route('sliders.index');
     }
 
@@ -86,7 +88,9 @@ class SliderController extends Controller
     public function update(Request $request, Slider $slider)
     {
         $validasi = $request->validate([
-            'gambar' => 'image|file|max:3000'
+            'gambar' => 'image|file|max:3000',
+            'caption' => 'required',
+            'deskripsi' => 'required'
         ]);
         
         if ($request->file('gambar')){

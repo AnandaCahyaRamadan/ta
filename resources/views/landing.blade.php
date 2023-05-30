@@ -63,11 +63,14 @@
                     @if ($slider->gambar)
                       <div class="carousel-item @if ($key == 0) active @endif">
                         <img src="{{ asset('storage/'. $slider->gambar) }}" class="d-block w-100" alt="Slider Image">
+                        <div class="carousel-caption d-none d-md-block">
+                          <h5>{{ $slider->caption }}</h5>
+                          <p>{{ $slider->deskripsi }}</p>
+                        </div>
                       </div>
                     @endif
                   @endforeach 
                 </div>
-            
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Previous</span>
@@ -116,6 +119,7 @@
         </section>
         
         <section id="products">
+            @if ($products->count() > 0)
             <div class="container pt-5 pb-5">
                 <div class="row g-4">
                   @foreach ($products as $key => $product)
@@ -143,6 +147,11 @@
                   @endforeach
                 </div>
             </div>
+            @else
+            <div class="container pt-2 pb-5">
+              <p>Product Belum ditambahkan</p>
+            </div>
+            @endif
         </section>
         <section id="about">
             <!-- Footer -->

@@ -16,7 +16,7 @@
 
                     <div class="form-group mb-2">
                         <label for="deskripsi">Deskripsi</label>
-                        <input type="text" class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" placeholder="Deskripsi" name="deskripsi">
+                        <textarea type="text" class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" placeholder="Deskripsi" name="deskripsi"></textarea>
                         @error('deskripsi') <span class="text-danger">{{$message}}</span> @enderror
                     </div>
 
