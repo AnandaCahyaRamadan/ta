@@ -22,7 +22,9 @@
                   </a>
                   <div class="collapse" id="collapseLayouts1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                       <nav class="sb-sidenav-menu-nested nav">
+                        @can('admin')
                           <a class="nav-link {{ Request::is('categories') ? 'active' : '' }}" href="/categories">Category</a>
+                        @endcan
                           <a class="nav-link {{ Request::is('products') ? 'active' : '' }}" href="/products">Products</a>
                       </nav>
                   </div>

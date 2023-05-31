@@ -43,7 +43,12 @@
                       <a class="nav-link {{ Request::is('#about') ? 'active':'' }} text-white" href="#about">About</a>
                     </li>
                   </ul>
-                  <a href="{{ route ('login') }}" class="btn btn-outline-warning"><i class="fa fa-sign-in-alt"></i> Login </a>
+                  @auth
+                  <a href="{{ route('login') }}" class="btn btn-outline-warning"><i class="fa fa-sign-in-alt"></i> Dashboard </a>
+                  @endauth
+                  @guest
+                  <a href="{{ route('login') }}" class="btn btn-outline-warning"><i class="fa fa-sign-in-alt"></i> Login </a>
+                  @endguest
                 </div>
               </div>
 
@@ -64,7 +69,7 @@
                       <div class="carousel-item @if ($key == 0) active @endif">
                         <img src="{{ asset('storage/'. $slider->gambar) }}" class="d-block w-100" alt="Slider Image">
                         <div class="carousel-caption d-none d-md-block">
-                          <h5>{{ $slider->caption }}</h5>
+                          <h2>{{ $slider->caption }}</h2>
                           <p>{{ $slider->deskripsi }}</p>
                         </div>
                       </div>
