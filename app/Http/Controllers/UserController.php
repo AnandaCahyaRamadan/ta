@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -96,30 +97,33 @@ class UserController extends Controller
      */
     
      public function update(Request $request, User $user)
-     {
-         $validasi = $request->validate([
-             "name" => "required",
-             "email" => "required|unique:users,email," . $user->id,
-             "password" => "required|confirmed|min:8",
-             "role_id" => "required",
-             "address" => "required",
-             "phone" => "required",
-             "avatar" => "image|file|max:2000"
-         ]);
-     
-         if ($request->hasFile('avatar')) {
-             if ($request->oldImage) {
-                 Storage::delete($request->oldImage);
-             }
-             $validasi['avatar'] = $request->file('avatar')->store('post-images');
-         }
-     
-         $validasi['password'] = bcrypt($validasi['password']);
-     
-         $user->update($validasi);
-     
-         return redirect()->route('users.index');
-     }
+        {
+            $validasi = $request->validate([
+                "name" => "required",
+                "email" => "required|unique:users,email," . $user->id,
+                "role_id" => "required",
+                "address" => "required",
+                "phone" => "required",
+                "avatar" => "image|file|max:2000",
+            ]);
+
+            if ($request->hasFile('avatar')) {
+                if ($request->oldImage) {
+                    Storage::delete($request->oldImage);
+                }
+                $validasi['avatar'] = $request->file('avatar')->store('post-images');
+            }
+
+            if (!empty($request->password)) {
+                $validasi['password'] = Hash::make($request->password);
+            } else {
+                unset($validasi['password']);
+            }
+
+            $user->update($validasi);
+
+            return redirect()->route('users.index');
+        }
      
     /**
      * Remove the specified resource from storage.

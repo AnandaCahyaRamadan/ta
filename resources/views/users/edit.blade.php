@@ -61,12 +61,12 @@
 
                     <div class="form-group mb-2">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Password" name="password" value="{{$user->password ?? old('password')}}">
+                        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Password" name="password">
                         @error('password') <span class="text-danger">{{$message}}</span> @enderror
                     </div>
                     <div class="form-group mb-2">
                         <label for="password">Konfirmasi Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Konfirmasi Password" name="password_confirmation" value="{{$user->password ?? old('password')}}">
+                        <input type="password" class="form-control" id="password" placeholder="Konfirmasi Password" name="password_confirmation">
                     </div>
 
                 </div>
