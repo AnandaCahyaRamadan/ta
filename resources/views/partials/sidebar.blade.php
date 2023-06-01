@@ -19,7 +19,7 @@
                   @if (Auth::user()->roles->role_name == 'admin')
                   <a class="nav-link {{ Request::is('categories') || Request::is('products') ? 'active' : '' }} collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts">
                       <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                      Products
+                      Product
                       <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                   </a>
                   <div class="collapse" id="collapseLayouts1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
