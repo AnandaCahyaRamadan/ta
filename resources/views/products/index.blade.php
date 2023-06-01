@@ -27,6 +27,9 @@
                                             @endif
                                             <th>Gambar</th>
                                             <th>Nama Produk</th>
+                                            @if (Auth::user()->roles->role_name != 'admin')
+                                            <th>Deskripsi</th>
+                                            @endif
                                             <th>Harga</th>
                                             <th>Kategori</th>
                                             <th>Status</th>
@@ -53,6 +56,9 @@
                                             @endif
                                             <td><img src="{{ asset('storage/' . $product->gambar )}}" class="img-fluid rounded-circle" width="100px"></td>
                                             <td>{{ $product->nama_product }}</td>
+                                            @if (Auth::user()->roles->role_name != 'admin')
+                                            <td>{{ $product->deskripsi }}</td>
+                                            @endif
                                             <td>{{ $product->harga }}</td>
                                             <td>{{ $product->categories->category_name }}</td>
                                             <td>{{ $product->status}}</td>
