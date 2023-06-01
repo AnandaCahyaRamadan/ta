@@ -10,6 +10,12 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                             @endif
+                            @if (session('success'))
+                            <div class="alert alert-success alert-dismissible fade show mt-3 me-1 ms-1" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            @endif
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead>
@@ -19,7 +25,6 @@
                                             <th>Avatar</th>
                                             <th>Nama</th>
                                             <th>Email</th>
-                                            <th>Phone</th>
                                             <th>Role</th>
                                         </tr>
                                     </thead>
@@ -43,7 +48,6 @@
                                             <td><img src="{{ asset('storage/' . $user->avatar )}}" class="img-fluid rounded-circle" width="100px"></td>
                                             <td>{{$user->name}}</td>
                                             <td>{{$user->email}}</td>
-                                            <td>{{$user->phone}}</td>
                                             <td>{{$user->roles->role_name}}</td>
                                         </tr>
                                         

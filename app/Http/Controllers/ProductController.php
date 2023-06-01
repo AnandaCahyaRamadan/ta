@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
@@ -55,8 +56,14 @@ class ProductController extends Controller
         if ($request->file('gambar')){
             $validasi['gambar'] = $request->file('gambar')->store('product-image');
         }
+        if (Auth::check() && Auth::user()->roles->role_name == 'admin') {
+            $validasi['status'] = 'approved';
+        }
+        else {
+            $validasi['status'] = 'pending';
+        }
         Product::create($validasi);
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')->withInput()->with('success','Berhasil menambah data product');
     }
 
     /**
@@ -106,7 +113,8 @@ class ProductController extends Controller
             'gambar' => 'image|file|max:4000',
             'harga' => 'integer|required',
             'category_id' => 'required',
-            'rating' => 'required'
+            'rating' => 'required',
+            'status' => 'required'
         ]);
         if ($request->hasFile('gambar')){
             if ($request->oldImage){
@@ -114,8 +122,11 @@ class ProductController extends Controller
             }
             $validasi['gambar'] = $request->file('gambar')->store('product-image');
         }
+        if ($validasi['status'] != 'approved' && $validasi['status'] != 'pending') {
+            return redirect()->route('sliders.index')->withInput()->with('error', 'Pastikan status approved atau pending');
+        }
         $product->update($validasi);
-        return redirect()->route('products.index')->withInput();
+        return redirect()->route('products.index')->withInput()->with('success','Berhasil mengubah data product');
     }
 
     /**
@@ -130,6 +141,6 @@ class ProductController extends Controller
             Storage::delete($product->gambar);
         }
         if ($product) $product->delete();
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')->with('success','Berhasil menghapus data product');
     }
 }

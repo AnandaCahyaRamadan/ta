@@ -4,8 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class IsAdmin
+class Role
 {
     /**
      * Handle an incoming request.
@@ -14,11 +15,14 @@ class IsAdmin
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, ...$roles)
     {
-        if ($request->user() && $request->user()->roles()->where('role_name', 'admin')->exists()) {
+        if (Auth::user() && in_array(Auth::user()->roles->role_name, $roles) ) {
             return $next($request);
         }
-        abort(403, 'Access denied. Only admins are allowed.');
+        else {
+            return abort(403);
+        }
+        
     }
 }

@@ -33,6 +33,12 @@
                     </div>
 
                     <div class="form-group mb-2">
+                        <label for="rating">Status</label>
+                        <input type="text" class="form-control @error('status') is-invalid @enderror" id="status" placeholder="Masukkan status" name="status" value="{{ $product->status ?? old('status') }}" disabled>
+                        @error('status') <span class="text-danger">{{$message}}</span> @enderror
+                    </div>
+
+                    <div class="form-group mb-2">
                         <label for="role">Category</label>
                         <select name="category_id" id="category_id" disabled>
                             @foreach ($categories as $category)

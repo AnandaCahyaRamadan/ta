@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('sliders', function (Blueprint $table) {
             $table->id();
-            $table->string('caption');
+            $table->string('title');
             $table->text('deskripsi');
             $table->string('gambar');
+            $table->enum('status', ['approved', 'pending']);
             $table->timestamps();
         });
     }

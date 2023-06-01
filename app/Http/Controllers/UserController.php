@@ -61,7 +61,7 @@ class UserController extends Controller
 
         User::create($validasi);
 
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->withInput()->with('success','Berhasil menambah data users');
     }
 
     /**
@@ -122,7 +122,7 @@ class UserController extends Controller
 
             $user->update($validasi);
 
-            return redirect()->route('users.index');
+            return redirect()->route('users.index')->withInput()->with('success','Berhasil mengubah data users');
         }
      
     /**

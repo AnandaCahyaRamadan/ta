@@ -44,7 +44,7 @@
                     </li>
                   </ul>
                   @auth
-                  <a href="{{ route('login') }}" class="btn btn-outline-warning"><i class="fa fa-sign-in-alt"></i> Dashboard </a>
+                  <a href="/dashboard" class="btn btn-outline-warning"> Dashboard </a>
                   @endauth
                   @guest
                   <a href="{{ route('login') }}" class="btn btn-outline-warning"><i class="fa fa-sign-in-alt"></i> Login </a>
@@ -59,20 +59,24 @@
                 <div class="carousel-indicators">
                   @foreach ($sliders as $key => $slider)
                     @if ($slider->gambar)
-                      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{ $key }}" class="@if ($key == 0) active @endif"></button>
+                      @if ($slider->status == 'approved')
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{ $key }}" class="@if ($key == 0) active @endif"></button>
+                      @endif
                     @endif
                   @endforeach
                 </div>
                 <div class="carousel-inner">
                   @foreach ($sliders as $key => $slider)
                     @if ($slider->gambar)
-                      <div class="carousel-item @if ($key == 0) active @endif">
-                        <img src="{{ asset('storage/'. $slider->gambar) }}" class="d-block w-100" alt="Slider Image">
-                        <div class="carousel-caption d-none d-md-block">
-                          <h2>{{ $slider->caption }}</h2>
-                          <p>{{ $slider->deskripsi }}</p>
+                      @if ($slider->status == 'approved')
+                        <div class="carousel-item @if ($key == 0) active @endif">
+                          <img src="{{ asset('storage/'. $slider->gambar) }}" class="d-block w-100" alt="Slider Image">
+                          <div class="carousel-caption d-none d-md-block">
+                            <h2>{{ $slider->title }}</h2>
+                            <p>{{ $slider->deskripsi }}</p>
+                          </div>
                         </div>
-                      </div>
+                      @endif
                     @endif
                   @endforeach 
                 </div>
@@ -84,7 +88,7 @@
                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Next</span>
                 </button>
-              </div>
+            </div>
         </section>            
         <section id="search">
           <div class="container">
@@ -124,31 +128,32 @@
         </section>
         
         <section id="products">
-            @if ($products->count() > 0)
+          @if (count($products) > 0 && $products[0]['status'] === 'approved')
             <div class="container pt-5 pb-5">
                 <div class="row g-4">
                   @foreach ($products as $key => $product)
-                    <div class="col-12 col-sm-6 col-md-3">
-                        <div class="card" style="width: 100%;">
-                            <img class="card-img-top" src="{{ asset('storage/' . $product->gambar )}}" alt="Card image cap">
-                            <div class="card-body">
-                              <h5 class="card-title my-1">{{ $product->nama_product }}</h5>
-                              <small class="fs-xmall fw-bold bg-warning pe-2 ps-2 pb-1 pt-1 rounded">{{ $product->categories->category_name }}</small>
-                              <p class="card-text my-1 text-warning text-bold">Rp. {{ $product->harga }}</p>
-                              <small class="card-text">{{ $product->deskripsi }}</small>
-                              <div class="mt-2">
-                                @for ($i = 1 ; $i <= $product->rating ; $i++)
-                                 <i class="fa fa-star text-warning"></i>
-                                @endfor
-                                <span> {{ $product->rating }}/5</span>
+                    @if ($product->status == 'approved')
+                      <div class="col-12 col-sm-6 col-md-3">
+                          <div class="card" style="width: 100%;">
+                              <img class="card-img-top" src="{{ asset('storage/' . $product->gambar )}}" alt="Card image cap">
+                              <div class="card-body">
+                                <h5 class="card-title my-1">{{ $product->nama_product }}</h5>
+                                <small class="fs-xmall fw-bold bg-warning pe-2 ps-2 pb-1 pt-1 rounded">{{ $product->categories->category_name }}</small>
+                                <p class="card-text my-1 text-warning text-bold">Rp. {{ $product->harga }}</p>
+                                <small class="card-text">{{ $product->deskripsi }}</small>
+                                <div class="mt-2">
+                                  @for ($i = 1 ; $i <= $product->rating ; $i++)
+                                  <i class="fa fa-star text-warning"></i>
+                                  @endfor
+                                  <span> {{ $product->rating }}/5</span>
+                                </div>
+                                <div class="mt-4">
+                                  <a href="https://wa.me/6281999651534" class="btn btn-warning fw-bold" style="width:100%"><i class="fab fa-whatsapp"></i> Pesan Sekarang</a>
+                                </div>
                               </div>
-                              <div class="mt-4">
-                                <a href="https://wa.me/6281999651534" class="btn btn-warning fw-bold" style="width:100%"><i class="fab fa-whatsapp"></i> Pesan Sekarang</a>
-                              </div>
-
-                            </div>
-                        </div>
-                    </div>
+                          </div>
+                      </div>
+                    @endif
                   @endforeach
                 </div>
             </div>

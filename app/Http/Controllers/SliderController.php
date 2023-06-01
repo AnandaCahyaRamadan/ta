@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Slider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreSliderRequest;
 use App\Http\Requests\UpdateSliderRequest;
@@ -42,7 +43,7 @@ class SliderController extends Controller
     public function store(Request $request, Slider $slider)
     {
         $validasi = $request->validate([
-            'caption' => 'required',
+            'title' => 'required',
             'deskripsi' => 'required',
             'gambar' => 'image|file|max:3000'
         ]);
@@ -50,8 +51,15 @@ class SliderController extends Controller
         if ($request->file('gambar')){
             $validasi['gambar'] = $request->file('gambar')->store('sliders');
         };
+
+        if (Auth::check() && Auth::user()->roles->role_name == 'admin') {
+            $validasi['status'] = 'approved';
+        }
+        else {
+            $validasi['status'] = 'pending';
+        }
         $slider->create($validasi);
-        return redirect()->route('sliders.index');
+        return redirect()->route('sliders.index')->withInput()->with('success', 'Berhasil menambah data slider');
     }
 
     /**
@@ -62,7 +70,9 @@ class SliderController extends Controller
      */
     public function show(Slider $slider)
     {
-        //
+        return view('sliders.show',[
+            'slider' => $slider
+        ]);
     }
 
     /**
@@ -89,8 +99,9 @@ class SliderController extends Controller
     {
         $validasi = $request->validate([
             'gambar' => 'image|file|max:3000',
-            'caption' => 'required',
-            'deskripsi' => 'required'
+            'title' => 'required',
+            'deskripsi' => 'required',
+            'status' => 'required'
         ]);
         
         if ($request->file('gambar')){
@@ -99,8 +110,11 @@ class SliderController extends Controller
             }
             $validasi['gambar'] = $request->file('gambar')->store('sliders');
         };
+        if ($validasi['status'] != 'approved' && $validasi['status'] != 'pending') {
+            return redirect()->route('sliders.index')->withInput()->with('error', 'Pastikan status approved atau pending');
+        }
         $slider->update($validasi);
-        return redirect()->route('sliders.index');
+        return redirect()->route('sliders.index')->withInput()->with('success', 'Berhasil mengubah data slider');
     }
 
     /**
@@ -115,6 +129,6 @@ class SliderController extends Controller
             Storage::delete($slider->gambar);
         };
         $slider->delete();
-        return redirect()->route('sliders.index');
+        return redirect()->route('sliders.index')->with('success', 'Berhasil menghapus data slider');
     }
 }

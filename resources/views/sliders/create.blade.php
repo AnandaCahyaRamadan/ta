@@ -9,9 +9,9 @@
                 <div class="card-body">
                     <h2>Tambah</h2>
                     <div class="form-group mb-2">
-                        <label for="caption">Caption</label>
-                        <input type="text" class="form-control @error('caption') is-invalid @enderror" id="caption" placeholder="caption" name="caption">
-                        @error('caption') <span class="text-danger">{{$message}}</span> @enderror
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Title" name="title">
+                        @error('title') <span class="text-danger">{{$message}}</span> @enderror
                     </div>
                     <div class="form-group mb-2">
                         <label for="deskripsi">Deskripsi</label>

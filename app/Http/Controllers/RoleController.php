@@ -43,7 +43,7 @@ class RoleController extends Controller
             'role_name' => 'required'
         ]);
         Role::create($validasi);
-        return redirect()->route('roles.index');
+        return redirect()->route('roles.index')->withInput()->with('success','Berhasil menambah data roles');
     }
 
     /**
@@ -83,7 +83,7 @@ class RoleController extends Controller
             'role_name' => 'required'
         ]);
         $role->update($validasi);
-        return redirect()->route('roles.index');
+        return redirect()->route('roles.index')->withInput()->with('success','Berhasil mengubah data roles');
     }
 
     /**
@@ -97,7 +97,7 @@ class RoleController extends Controller
         try {
             
             if ($role) $role->delete();
-            return redirect()->route('roles.index');
+            return redirect()->route('roles.index')->with('success','Berhasil menghapus data roles');
             
         } catch (QueryException $e) {
             if ($e->errorInfo[1] === 1451) {

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('harga');
             $table->string('deskripsi');
             $table->string('gambar');
+            $table->enum('status', ['approved', 'pending']);
             $table->integer('rating');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')

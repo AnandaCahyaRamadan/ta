@@ -43,7 +43,7 @@ class CategoryController extends Controller
             'category_name' => 'required'
         ]);
         $category->create($validasi);
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.index')->withInput()->with('success', 'Berhasil menambah data categories');
     }
 
     /**
@@ -83,7 +83,7 @@ class CategoryController extends Controller
             'category_name' => 'required'
         ]);
         $category->update($validasi);
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.index')->withInput()->with('success', 'Berhasil mengubah data categories');
     }
 
     /**
@@ -97,7 +97,7 @@ class CategoryController extends Controller
         try {
             
             $category->delete();
-            return redirect()->route('categories.index');
+            return redirect()->route('categories.index')->with('success', 'Berhasil menghapus data categories');;
             
         } catch (QueryException $e) {
             if ($e->errorInfo[1] === 1451) {

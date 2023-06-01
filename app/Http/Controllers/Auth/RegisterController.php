@@ -107,7 +107,13 @@ class RegisterController extends Controller
 
         $this->guard()->login($user);
 
-        return redirect($this->redirectPath());
+        // return redirect($this->redirectPath());
+        
+        if ($user->roles->role_name == 'admin') {
+            return redirect('/dashboard');
+        } else {
+            return redirect('/sliders');
+        }
     }
 
 }
