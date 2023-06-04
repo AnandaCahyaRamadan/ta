@@ -44,7 +44,11 @@
                     </li>
                   </ul>
                   @auth
-                  <a href="/dashboard" class="btn btn-outline-warning"> Dashboard </a>
+                    @if (auth()->user()->role_name == 'admin')
+                      <a href="/dashboard" class="btn btn-outline-warning"> Dashboard </a>
+                    @else
+                    <a href="/sliders" class="btn btn-outline-warning"> Sliders </a>
+                    @endif
                   @endauth
                   @guest
                   <a href="{{ route('login') }}" class="btn btn-outline-warning"><i class="fa fa-sign-in-alt"></i> Login </a>
