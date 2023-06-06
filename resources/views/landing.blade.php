@@ -32,7 +32,7 @@
                   <i class="fa fa-bars text-warning"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ps-2 me-4">
+                  <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ps-2 me-3">
                     <li class="nav-item ">
                       <a class="nav-link {{ Request::is('#') ? 'active':'' }} text-white" aria-current="page" href="#">Home</a>
                     </li>
@@ -43,9 +43,10 @@
                       <a class="nav-link {{ Request::is('#about') ? 'active':'' }} text-white" href="#about">About</a>
                     </li>
                   </ul>
-                    @if (Auth::user()->roles->role_name == 'admin')
+                    @if (Auth::check() && Auth::user()->roles->role_name == 'admin')
                       <a href="/dashboard" class="btn btn-outline-warning"> Dashboard </a>
-                    @else
+                    @endif
+                    @if (Auth::check() && Auth::user()->roles->role_name != 'admin')
                     <a href="/sliders" class="btn btn-outline-warning"> Sliders </a>
                     @endif
                   @guest
