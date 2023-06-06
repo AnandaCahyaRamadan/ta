@@ -97,10 +97,10 @@
         <section id="search">
           <div class="container">
             <div class="row align-items-center">
-              <div class="col-md-12 text-center mb-2 pt-5">
-                <img src="https://i.postimg.cc/1zsqTwxv/KAKI.png" alt="" class="pb-4 pt-2" width="35%">
+              <div class="col-md-12 mb-2 pt-5">
+                <h2 class="fw-bold text-warning"> Product</h2>
               </div>
-              <div class="col-md-12 text-center mb-2">
+              <div class="col-md-12 text-center mb-1">
                 <form action="/search" method="get">
                   <div class="input-group mx-auto">
                     <div class="row g-4">
@@ -133,7 +133,7 @@
         
         <section id="products">
           @if (count($products) > 0 && $products[0]['status'] === 'approved')
-            <div class="container pt-5 pb-5">
+            <div class="container pt-4 pb-5">
                 <div class="row g-4">
                   @foreach ($products as $key => $product)
                     @if ($product->status == 'approved')
