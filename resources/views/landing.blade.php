@@ -97,7 +97,7 @@
           <div class="container">
             <div class="row align-items-center">
               <div class="col-md-12 mb-2 pt-5">
-                <h2 class="fw-bold text-warning"> Product</h2>
+                <h3> Product Kami</h3>
               </div>
               <div class="col-md-12 text-center mb-1">
                 <form action="/search" method="get">
