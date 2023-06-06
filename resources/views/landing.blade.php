@@ -43,13 +43,11 @@
                       <a class="nav-link {{ Request::is('#about') ? 'active':'' }} text-white" href="#about">About</a>
                     </li>
                   </ul>
-                  @auth
-                    @if (auth()->user()->role_name == 'admin')
+                    @if (Auth::user()->roles->role_name == 'admin')
                       <a href="/dashboard" class="btn btn-outline-warning"> Dashboard </a>
                     @else
                     <a href="/sliders" class="btn btn-outline-warning"> Sliders </a>
                     @endif
-                  @endauth
                   @guest
                   <a href="{{ route('login') }}" class="btn btn-outline-warning"><i class="fa fa-sign-in-alt"></i> Login </a>
                   @endguest
