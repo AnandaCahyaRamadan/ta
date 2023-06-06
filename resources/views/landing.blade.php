@@ -16,7 +16,7 @@
      <!-- Option 1: Include in HTML -->
      <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
      <!-- Scripts -->
-    <title>Landing Page</title>
+    <title>Mimi Kitty</title>
     <style>
        body {
         font-family: 'Poppins', sans-serif;
