@@ -21,6 +21,15 @@
        body {
         font-family: 'Poppins', sans-serif;
         }
+        .row-with-gutter {
+        margin-left: -5px;
+        margin-right: -5px;
+      }
+
+      .col-with-gutter {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
     </style>
 </head>
 <body>
@@ -95,33 +104,25 @@
         </section>            
         <section id="search">
           <div class="container">
-            <div class="row align-items-center">
-              <div class="col-md-12 mb-2 pt-5">
+              <div class="mb-3 pt-5">
                 <h3> Product Kami</h3>
               </div>
-              <div class="col-md-12 text-center mb-1">
-                <form action="/search" method="get">
-                  <div class="input-group mx-auto">
-                    <div class="row g-4">
-                      <div class="col-md-3">
-                        <input type="search" name="search" id="search" class="form-control rounded " placeholder="Masukkan kategori, judul atau deskripsi" aria-label="Search"  aria-describedby="search-addon" />
-                      </div>
-                      <div class="col-md-3">
-                        <input type="number" name="min_price" class="form-control rounded" placeholder="Harga minimal">
-                      </div>
-                      <div class="col-md-3">
-                        <input type="number" name="max_price" class="form-control rounded" placeholder="Harga maksimal">
-                      </div>
-                      <div class="col-md-3">
-                        <button type="submit" class="btn btn-outline-warning w-100">Search</button>
-                      </div>
+              <form action="/search" method="get">
+                <div class="row g-4">
+                    <div class="col-12 col-sm-6 col-md-3">
+                      <input type="search" name="search" id="search" class="form-control rounded" placeholder="Masukkan kategori, judul atau deskripsi" aria-label="Search"  aria-describedby="search-addon" />
                     </div>
-                
-                  </div>
-                </form>
-              
-              </div>
-            </div>
+                    <div class="col-12 col-sm-6 col-md-3">
+                      <input type="number" name="min_price" class="form-control rounded" placeholder="Harga minimal">
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3">
+                      <input type="number" name="max_price" class="form-control rounded" placeholder="Harga maksimal">
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3">
+                      <button type="submit" class="btn btn-outline-warning w-100">Search</button>
+                    </div>
+                </div>
+              </form>              
             @if (session('error'))
             <div class="text-danger">
                 {{ session('error') }}
