@@ -83,7 +83,7 @@
                       @if ($slider->status == 'approved')
                         <div class="carousel-item @if ($key == 0) active @endif">
                           <img src="{{ asset('storage/'. $slider->gambar) }}" class="d-block w-100" alt="Slider Image">
-                          <div class="carousel-caption d-none d-md-block">
+                          <div class="carousel-caption d-none d-md-block bg-dark p-3 opacity-75 rounded">
                             <h2>{{ $slider->title }}</h2>
                             <p>{{ $slider->deskripsi }}</p>
                           </div>
@@ -131,9 +131,9 @@
           </div>
         </section>
         
-        <section id="products">
+       <section id="products">
           @if (count($products) > 0 && $products[0]['status'] === 'approved')
-          <div class="container pt-5 pb-5">
+          <div class="container pt-4 pb-5">
             <div class="row g-4">
               @foreach ($products as $key => $product)
               <div class="col-12 col-sm-6 col-md-3 d-flex align-items-stretch">
