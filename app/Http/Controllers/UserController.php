@@ -108,8 +108,8 @@ class UserController extends Controller
             ]);
 
             if ($request->hasFile('avatar')) {
-                if ($request->oldImage) {
-                    Storage::delete($request->oldImage);
+                if ($user->avatar) {
+                    Storage::delete($user->avatar);
                 }
                 $validasi['avatar'] = $request->file('avatar')->store('post-images');
             }

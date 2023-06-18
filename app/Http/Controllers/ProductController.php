@@ -117,8 +117,8 @@ class ProductController extends Controller
             'status' => 'required'
         ]);
         if ($request->hasFile('gambar')){
-            if ($request->oldImage){
-                Storage::delete($request->oldImage);
+            if ($product->gambar){
+                Storage::delete($product->gambar);
             }
             $validasi['gambar'] = $request->file('gambar')->store('product-image');
         }

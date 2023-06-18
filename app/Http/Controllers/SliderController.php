@@ -105,8 +105,8 @@ class SliderController extends Controller
         ]);
         
         if ($request->file('gambar')){
-            if ($request->oldImage) {
-                Storage::delete($request->oldImage);
+            if ($slider->gambar) {
+                Storage::delete($slider->gambar);
             }
             $validasi['gambar'] = $request->file('gambar')->store('sliders');
         };
