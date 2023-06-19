@@ -15,6 +15,7 @@
                     </div>
                     <div class="card-footer mb-2">
                     <button type="submit" class="btn btn-success">Simpan</button>
+                    <a href="{{ route('categories.index') }}" class="btn">Batal</a>
                 </div>
             </div>
         </div>
