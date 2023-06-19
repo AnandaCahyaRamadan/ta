@@ -11,7 +11,7 @@ class LandingController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::latest()->get();
         $sliders = Slider::all(); 
         return view('landing', [
             'products' => $products,
