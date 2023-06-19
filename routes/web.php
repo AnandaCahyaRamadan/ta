@@ -57,7 +57,6 @@ Route::middleware('role:admin')->group(function(){
     Route::delete('/users/{user}', [\App\Http\Controllers\UserController::class, 'destroy'])->middleware('auth')->name('users.destroy');
 });
 
-
 Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);
 
 
